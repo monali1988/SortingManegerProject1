@@ -1,58 +1,42 @@
 package com.sparta.sort;
 
+import Controller.SortManager;
+import Model.BSTSort;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-class BubbleSortTest  {
-        private BubbleSort sorter = new BubbleSort();
+class BubbleSortTest {
+    private SortManager controller;
+    private String bubble = "b";
 
+    @BeforeEach
+    public void setUp() {
+        controller = new SortManager();
+    }
 
-    @Test
-    void bubbletest() {
-        BubbleSort bs = new BubbleSort();
-        int[] data = { 76, 45, 0, 11, 45 };
-        int[] result= {0, 11, 45, 45, 76};
-        assertArrayEquals(result,data);
+    public int[] copyArray(int[] originalArray) {
+        int[] inputArrayCopy = originalArray.clone();
+        Arrays.sort(inputArrayCopy);
+        return inputArrayCopy;
     }
 
     @Test
-    public void shouldDoNothingWithEmptyArray() {
-        int[] values = {};
-        sorter.sort(values);
-
-    }
-
-    @Test
-    public void shouldDoNothingWithOneElementArray() {
-        int[] values = {42};
-
-        sorter.sort(values);
-
-        assertArrayEquals(new int[] {42}, values);
-    }
-
-        private void assertArrayEquals ( int[] result, int[] data){
+    @DisplayName("This checks if an array is sorted via the Bubble Sort method")
+    public void testBubbleSort() {
+        int[] inputArray = new int[10000];
+        for (int i = 0; i < inputArray.length; i++) {
+            inputArray[i] = (int) Math.floor((Math.random() * 100) + 1);
         }
-
-       private void assertArrayEquals () {
-        }
-
-        @Test
-        void NotSame () {
-
-            int[] data = {76, 45, 0, 11, 45};
-            int[] result1 = {10, 20, 30, 40, 50};
-            assertNotEquals(result1, data);
-        }
-
-    @Test
-    public void shouldSortValues() {
-        int[] values = { 9, -3, 5, 0, 1};
-        int[] expectedOrder = { -3, 0, 1, 5, 9};
-
-        sorter.sort(values);
-
-        assertArrayEquals(expectedOrder, values);
+        int[] inputArrayCopy = copyArray(inputArray);
+        int[] result = controller.sortArray(bubble, inputArray);
+        String expected = Arrays.toString(result);
+        String actual = Arrays.toString(inputArrayCopy);
+        Assertions.assertEquals(expected, actual);
     }
-    }
+}

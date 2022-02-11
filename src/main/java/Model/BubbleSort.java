@@ -1,6 +1,8 @@
-package com.sparta.sort;
+package Model;
 
-public class BubbleSort implements Sort{
+import Model.Sort;
+
+public class BubbleSort implements Sort {
     // perform the bubble sort
 
     @Override
@@ -22,11 +24,5 @@ public class BubbleSort implements Sort{
 
 
 }
-
-
-
-
-
-
 
 
